@@ -1,0 +1,346 @@
+composer create-project larvel/laravel simplewebsite
+	use to install laravel and create simplewebsite project
+
+
+code .
+	use to run visualstudio code
+
+npn install -g nodemon
+	use to watch all you done in laravel
+
+goto xampp/apache/conf/extra/httpd-vhosts.conf
+	edit it and create vhost by copying example and edit it
+		 here the exaple
+		 
+		<VirtualHost *:80>
+    
+			DocumentRoot "C:/xampp/htdocs/simplewebsite/public"
+			ServerName simplewebsite.io
+   
+		</VirtualHost>
+
+
+		edit the coument for the folder location of your project and add public at the end
+		the create a servername use the name of your project and use io or test as the extension
+		if you not done this you cannot run the project
+
+
+in gitbash type cd  simplewebsite
+		
+goto localdisk c windows/System32/drivers/etc/host
+	edit host file to include to recognize by the xampp the host that you created
+		
+ add your host so it can be a realhost
+ 
+	127.0.0.1 localhost
+	127.0.0.1 simplewebsite.io
+	
+npm -version 
+	to know the laravel version
+
+composer update
+	use to update laravel
+	
+goto to visual studio code simpplewebsite/routes/web.php
+
+	create new routes for nexpages
+	
+	
+	
+		here the example of routes
+	Route::get('/about', function () {
+    return view('about');
+	});
+
+goto resources and saas/views
+	routes are destinations use to get the content of the folder
+	right click and new folder and name as layout
+	and inside layout folder right click and create new file file app.blade.php
+	 inside app.blade.php create basic html file
+	 so why app.blade.php because that isa the basic file use in laravel
+	 
+type inside app.blade.php to test the website
+	 <!DOCTYPE html>
+<html>
+<head>
+
+     <meta charset="utf-8">
+	 <meta author="Jonel J. Lagumbay">
+	 <title>Laravel Simple Website</title>
+
+
+</head>
+<body>
+	<h1>This is a laravel  Webpage</h1>
+    @yield('content')
+
+</body>
+</html>
+	 
+	 
+create new file under views
+	 home.blade.php
+	 about.home.php
+	 contact.blade.php
+	 
+	 
+in home.blade.php,contact.blade.php,about.blade.php
+	 type
+	 @extends('layout.app')
+	 @section('content')
+	<h1>This is a laravel Home Webpage</h1>
+	@endsection
+	
+	to test the pages
+
+composer use to update php laravel
+to update use "composer update" command
+"php artisan --version" use to know the version of laravel
+
+
+	@yield('content') use to call the contents
+	@extends('layout.php') use to include
+	
+
+
+go to resources/views create folder inc then 
+create file sidebar.blade.php
+ and type 
+ 
+	
+	<div class="well">
+	<h3> sidebar</h3>
+	This is Sidebar
+	</div>
+	
+
+ 
+#  	
+	npm install
+	npm run dev
+    npm run watch
+	
+	use to monitor what are we doing and changes
+#
+
+pase below the program in home,about,contact
+	@section('sidebar')
+	@endsection
+
+and type inside the body of app 
+	@include('inc.sidebar')
+	
+	
+create new file name _custom.scss in sass
+in app.scss type
+	@import 'custom'
+	
+	so it will include the css file
+
+goto app.blade and type
+	<link rel="stylesheet" type="text/css" href="css/app/css">
+	
+create navbar.blade.php inside inc
+
+type 
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+			
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapsed" data-target="navbar" aria-expanded="false" aria-controls="navabar">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Excel</a>
+			</div>
+               <div id="navbar-brand" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="{{Request::is('/') ? 'active' : ''}}">Home</li>
+                        <li class="{{Request::is('/about') ? 'active' : ''}}">About</li>
+                        <li class="{{Request::is('/contact') ? 'active' : ''}}">Contact</li>
+                    </ul>
+
+                </div>
+		</div>
+</nav>
+
+errror yan
+
+
+	go to bootstrap/doccumentaion/navbar copy
+	and paste to navbar.blade.php
+	remove unnecesary code and this must be look like
+	
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Excel</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class=" nav-link {{Request::is('/') ? 'active' : ''}} text-light" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class=" nav-link {{Request::is('/about') ? 'active' : ''}} text-light" href="/about">About</a>
+      </li>
+      <li class="nav-item">
+        <a class=" nav-link {{Request::is('/contact') ? 'active' : ''}} text-light" href="/contact">Contact</a>
+      </li>
+    </ul>
+      
+    
+  </div>
+</nav>
+
+
+
+next edit app.blade
+		<!DOCTYPE html>
+<html>
+<head>
+
+     <meta charset="utf-8">
+	 <meta author="Jonel J. Lagumbay">
+	 <title>Laravel Simple Website</title>
+     <link rel="stylesheet" type="text/css" href="css/app.css"> 
+     
+
+
+</head>
+<body>
+
+    @include('inc.navbar')
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-lg-8">
+                      @yield('content')
+                </div>
+                <div class="col-md-4 col-lg-4">
+                      @include('inc.sidebar')
+                </div>
+                
+
+            </div>
+        </div>
+
+
+    
+    
+    
+
+</body>
+</html>
+
+
+create jumbotron.blade.php in inc folder
+ type this code
+ <div class="jumbotron text-center">
+    <div class="container">
+        <h1>welcome to Excel</h1>
+        <p class="lead">Welcome to Excel Webpage</p>
+    </div>
+</div>
+
+then include in the app this is the code
+	<!DOCTYPE html>
+<html>
+<head>
+
+     <meta charset="utf-8">
+	 <meta author="Jonel J. Lagumbay">
+	 <title>Laravel Simple Website</title>
+     <link rel="stylesheet" type="text/css" href="css/app.css"> 
+     
+
+
+</head>
+<body>
+
+    @include('inc.navbar')
+        <div class="container">
+            @if(Request::is('/'))
+            @include('inc.jumbotron')
+            @endif
+            <div class="row">
+                <div class="col-md-8 col-lg-8">
+                      @yield('content')
+                </div>
+                <div class="col-md-4 col-lg-4">
+                      @include('inc.sidebar')
+                </div>
+
+
+            </div>
+        </div>
+
+
+    <footer id="footer" class="text-center"><p>Copyright 2019 &copy; Excel</p></footer>
+    
+    
+
+</body>
+</html>
+
+
+ we add footer and . we use if condition so we can display in multiple page if does not end b end if
+ 
+ 
+  so create design in footer in _custom.css
+	type this code
+	#footer{
+        margin-top: 30px;
+        padding: 20px;
+        color: #FFF;
+        background: grey;
+}
+  
+  
+	
+
+
+
+
+
+
+
+	 
+	
+	 
+	 
+	 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
